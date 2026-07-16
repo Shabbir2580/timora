@@ -1,4 +1,10 @@
 import Image from "next/image";
+import {
+  Search,
+  Heart,
+  ShoppingCart,
+  User,
+} from "lucide-react";
 
 export default function Navbar() {
   return (
@@ -6,7 +12,8 @@ export default function Navbar() {
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
 
         {/* Logo */}
-        <div className="flex items-center gap-3 cursor-pointer">
+        <div className="flex cursor-pointer items-center gap-3">
+
           <Image
             src="/images/logo.png"
             alt="Timora Logo"
@@ -20,34 +27,44 @@ export default function Navbar() {
               TIMORA
             </h1>
 
-            <p className="text-xs text-gray-400 tracking-[0.3em]">
+            <p className="text-xs tracking-[0.3em] text-gray-400">
               TIMELESS ESSENCE
             </p>
           </div>
+
         </div>
 
         {/* Search */}
-        <div className="hidden md:flex w-[40%]">
+
+        <div className="relative hidden w-[40%] md:block">
+
+          <Search
+            size={20}
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+          />
+
           <input
             type="text"
-            placeholder="Search luxury products..."
-            className="w-full rounded-full border border-[#D4AF37]/40 bg-[#171717] px-5 py-3 text-white outline-none transition-all duration-300 focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/40"
+            placeholder="Search products..."
+            className="w-full rounded-full border border-[#D4AF37]/40 bg-[#171717] py-3 pl-12 pr-5 text-white outline-none transition-all duration-300 focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/30"
           />
+
         </div>
 
         {/* Right Side */}
+
         <div className="flex items-center gap-6">
 
-          <button className="text-white hover:text-[#D4AF37] transition">
-            Login
+          <button className="text-white transition hover:text-[#D4AF37]">
+            <User size={22} />
           </button>
 
-          <button className="text-white hover:text-[#D4AF37] transition">
-            Wishlist
+          <button className="text-white transition hover:text-[#D4AF37]">
+            <Heart size={22} />
           </button>
 
-          <button className="rounded-full bg-[#D4AF37] px-5 py-2 font-semibold text-black transition hover:scale-105">
-            Cart
+          <button className="rounded-full bg-[#D4AF37] p-3 text-black transition hover:scale-110">
+            <ShoppingCart size={20} />
           </button>
 
         </div>
