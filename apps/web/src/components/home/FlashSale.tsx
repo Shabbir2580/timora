@@ -1,38 +1,65 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import products from "@/data/products";
+import ProductCard from "@/components/product/ProductCard";
+
 export default function FlashSale() {
+  const [timeLeft, setTimeLeft] = useState(4 * 60 * 60);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const hours = String(Math.floor(timeLeft / 3600)).padStart(2, "0");
+  const minutes = String(Math.floor((timeLeft % 3600) / 60)).padStart(2, "0");
+  const seconds = String(timeLeft % 60).padStart(2, "0");
+
   return (
-    <section className="bg-[#101010] py-24 px-6">
+    <section className="bg-[#0B0B0B] py-24 px-6">
 
-      <div className="mx-auto max-w-7xl rounded-3xl border border-[#D4AF37]/30 bg-[#151515] p-12">
+      <div className="mx-auto max-w-7xl">
 
-        <div className="flex flex-col items-center justify-between gap-10 lg:flex-row">
+        <div className="mb-16 flex flex-col items-center justify-between gap-6 md:flex-row">
 
           <div>
 
-            <p className="mb-3 text-[#D4AF37] uppercase tracking-[0.4em]">
+            <p className="mb-2 text-[#D4AF37] tracking-[0.3em] uppercase">
               Limited Time
             </p>
 
             <h2 className="text-5xl font-bold text-white">
-              ⚡ Flash Sale
+              🔥 Flash Sale
             </h2>
-
-            <p className="mt-5 max-w-xl text-gray-400">
-              Grab exclusive premium deals before they disappear.
-            </p>
 
           </div>
 
-          <div className="rounded-3xl bg-black px-12 py-8 text-center">
+          <div className="rounded-2xl border border-[#D4AF37] px-8 py-5 text-center">
 
-            <p className="text-gray-400">
+            <p className="text-sm text-gray-400">
               Ends In
             </p>
 
-            <h2 className="mt-3 text-5xl font-bold text-[#D4AF37]">
-              02 : 15 : 36
-            </h2>
+            <h3 className="mt-2 text-4xl font-bold text-[#D4AF37]">
+              {hours}:{minutes}:{seconds}
+            </h3>
 
           </div>
+
+        </div>
+
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+
+          {products.map((product) => (
+            <ProductCard
+  key={product.id}
+  product={product}
+/>
+          ))}
 
         </div>
 
